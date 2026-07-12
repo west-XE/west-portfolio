@@ -274,10 +274,16 @@
   const io = new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.14});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // autoplay work videos while in view
+  // autoplay work videos while in view (Safari-safe: retry once loaded)
   const vio = new IntersectionObserver((es)=>es.forEach(e=>{
-    const v=e.target; if(e.isIntersecting){v.play().catch(()=>{})} else {v.pause()}
-  }),{threshold:.45});
+    const v=e.target;
+    if(e.isIntersecting){
+      v.muted=true;
+      const play=()=>v.play().catch(()=>{});
+      play();
+      v.addEventListener('canplay',play,{once:true});  // Safari needs this once data is ready
+    } else { v.pause(); }
+  }),{threshold:.4});
   document.querySelectorAll('.workmedia video').forEach(v=>vio.observe(v));
 
   // subtle parallax on work videos as you scroll
