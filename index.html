@@ -188,7 +188,7 @@
 </nav>
 
 <header>
-  <div class="herobg"><video src="videos/hero.mp4" autoplay muted loop playsinline></video></div>
+  <div class="herobg"><video src="videos/hero.mp4" autoplay muted loop playsinline preload="auto"></video></div>
   <div class="heroscrim"></div>
   <div class="wrap">
     <div class="eyebrow reveal">Motion Designer · Web3</div>
@@ -319,6 +319,16 @@
       mag.style.transform=`translate(${(x*0.2).toFixed(1)}px,${(y*0.35).toFixed(1)}px)`;
     });
     mag.addEventListener('mouseleave',()=>{mag.style.transform=''});
+  }
+
+  // force the hero video to play (Safari refuses initial autoplay on muted video)
+  const hero = document.querySelector('.herobg video');
+  if(hero){
+    const kick = ()=>{ hero.muted=true; hero.play().catch(()=>{}); };
+    ['loadeddata','canplay'].forEach(ev=>hero.addEventListener(ev,kick));
+    document.addEventListener('visibilitychange',()=>{ if(!document.hidden) kick(); });
+    ['scroll','pointerdown','touchstart','keydown'].forEach(ev=>addEventListener(ev,kick,{once:true,passive:true}));
+    kick();
   }
 
   addEventListener('load',()=>document.querySelectorAll('header .reveal').forEach(el=>el.classList.add('in')));
