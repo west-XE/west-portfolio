@@ -80,7 +80,18 @@
   header .eyebrow{color:#fff}
   header h1{color:#fff}
   header h1 .thin{color:rgba(255,255,255,.6)}
-  header .sub{color:rgba(255,255,255,.82)}
+  header .sub{color:rgba(255,255,255,.82);max-width:60ch} /* wide enough that the line ends on the logos in two lines */
+  /* client names in the hero line, linked to their X profiles */
+  .brandlink{color:inherit;font-weight:inherit;transition:color .25s} /* same as the line around it (bold white "looked weird"); the logos carry the brands */
+  .brandlink:hover{color:#fff}
+  .nowrap{white-space:nowrap} /* "Shack." and the two logos never split across lines */
+  /* the two clients' logos together at the end of the line, as rounded-square badges (how brand accounts show on X) */
+  .blogos{display:inline-flex;gap:.3em;margin-left:.5em;vertical-align:-.2em}
+  .blogos a{display:inline-flex;transition:transform .2s,opacity .2s}
+  .blogos a:hover{transform:translateY(-1px);opacity:.85}
+  .blogo{display:inline-flex;align-items:center;justify-content:center;width:1.15em;height:1.15em;border-radius:26%;overflow:hidden;background:#0b0b0b;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+  .blogo img{width:100%;height:100%;object-fit:cover;display:block}
+  .blogo img[src$=".svg"]{width:68%;height:68%;object-fit:contain}
   header .herometa{color:rgba(255,255,255,.8)}
   header .dot{background:#fff}
   header .scrollcue{color:rgba(255,255,255,.9)}
@@ -91,7 +102,7 @@
   nav.scrolled .logo{color:var(--ink)}
   nav.scrolled .navlinks{color:var(--muted)}
   nav.scrolled .navlinks a:hover{color:var(--ink)}
-  .eyebrow{font-family:var(--serif);font-style:italic;color:var(--ink);letter-spacing:.03em;font-size:19px;margin-bottom:26px}
+  .eyebrow{font-family:var(--sans);font-weight:300;color:var(--ink);letter-spacing:.01em;font-size:22px;margin-bottom:22px} /* Apple's SF Pro, light (200 was "too thin"; was a serif italic) */
   h1{
     font-size:clamp(46px,8.2vw,116px);line-height:.98;font-weight:800;
     letter-spacing:-.035em;max-width:14ch;
@@ -202,12 +213,11 @@
 </nav>
 
 <header>
-  <div class="herobg"><video src="videos/hero.mp4" autoplay muted loop playsinline preload="auto"></video></div>
+  <div class="herobg"><video src="videos/hero3.mp4" autoplay muted loop playsinline preload="auto"></video></div>
   <div class="heroscrim"></div>
   <div class="wrap">
-    <div class="eyebrow reveal">Motion Designer · Web3</div>
     <h1 class="reveal d1">Crypto stories,<br><span class="thin">made into film.</span></h1>
-    <p class="sub reveal d2">I design and animate premium launch videos, explainers and brand films for Web3. Recent work sponsored by Meteora.</p>
+    <p class="sub reveal d2">I turn launches, products and ideas into films people actually watch. Recent work for <a class="brandlink" href="https://x.com/MeteoraAG" target="_blank" rel="noopener">Meteora</a> &amp; <span class="nowrap"><a class="brandlink" href="https://x.com/shackxyz" target="_blank" rel="noopener">Shack</a>.<span class="blogos"><a href="https://x.com/MeteoraAG" target="_blank" rel="noopener" aria-label="Meteora on X"><span class="blogo"><img src="logos/meteora.svg" alt="Meteora" /></span></a><a href="https://x.com/shackxyz" target="_blank" rel="noopener" aria-label="Shack on X"><span class="blogo"><img src="logos/shack.jpg" alt="Shack" /></span></a></span></span></p>
   </div>
   <div class="scrollcue">Scroll ↓</div>
 </header>
@@ -219,13 +229,13 @@
 <section id="about">
   <div class="wrap about">
     <div class="reveal">
-      <p>I turn complex crypto and fintech ideas into videos people actually <span class="g">watch</span> — the kind that make a launch feel inevitable. Storytelling first, then the craft: 3D, data motion, sound.</p>
+      <p>I turn complex crypto and fintech ideas into films that <span class="g">hold attention</span> — the kind that make a launch feel inevitable. Storytelling first, then the craft: 3D, data motion, sound.</p>
       <p style="margin-top:28px">Self-taught — I mastered <span class="g">programming at 16</span>, and that engineer's precision runs through everything I make. I build in Remotion (video as code), and beyond motion, I <span class="g">clip, edit and write</span> for the teams I work with.</p>
     </div>
     <div class="kv reveal d1">
       <div class="row"><span>Services</span><span>Launch films · Motion<br>Editing · Clipping · Writing</span></div>
-      <div class="row"><span>Tools</span><span>Remotion (React) · After Effects<br>FFmpeg · Figma</span></div>
-      <div class="row"><span>Clients</span><span>Meteora-sponsored ·<br>Solana ecosystem</span></div>
+      <div class="row"><span>Tools</span><span>Remotion (React) · Three.js · After Effects<br>FFmpeg · Whisper · OpenCV · Figma</span></div>
+      <div class="row"><span>Clients</span><span>Meteora-sponsored · Shack<br>Solana ecosystem</span></div>
       <div class="row"><span>Based</span><span>Remote · Worldwide</span></div>
     </div>
   </div>
@@ -251,14 +261,14 @@
 
 <script>
   const works = [
+    {key:"tokenization3",title:"Tokenization",     cat:"Narrative Film",  desc:"The story of stocks moving onchain. Reposted by Solana.", tweet:"https://x.com/MeteoraEco/status/2110054171261165747"},
+    {key:"stockdist",    title:"Stock Distribution", cat:"Narrative Film", desc:"Billions are locked out of US stocks. Tokenization lets them in.", tweet:"https://x.com/MeteoraEco/status/2113677735336001756"},
+    {key:"silkroad3",    title:"Silk Road 2.1",    cat:"Brand Film",      desc:"Freedom of trade, without the illegal half. For Shack.", tweet:"https://x.com/shackxyz/status/2100336486956548603"},
+    {key:"shacktrust",   title:"Speed of Trust",   cat:"Brand Film",      desc:"Trade moves at the speed of trust. Shack's first film.", tweet:"https://x.com/shackxyz/status/2081297453064581219"},
     {key:"easya",        title:"EasyA Kickstart",  cat:"Launch Film",     desc:"A launch film for an onchain platform for founders.", tweet:"https://x.com/MeteoraEco/status/2072969119419482173"},
+    {key:"groupshack",   title:"Group Shack",      cat:"Product Film",    desc:"Private and public trading groups, now approved by Apple. For Shack.", tweet:"https://x.com/shackxyz/status/2098394538360307927"},
     {key:"fitted",       title:"Fitted",           cat:"Brand Film",      desc:"A brand story, animated end to end.", tweet:"https://x.com/MeteoraEco/status/2060732877319569589"},
     {key:"metglobal",    title:"MetGlobal",        cat:"Community Film",   desc:"The Meteora community, worldwide.", tweet:"https://x.com/MeteoraEco/status/2033937622096347229"},
-    {key:"surfcash",     title:"Surfcash",         cat:"Product Film",    desc:"A crypto neobank, in motion.", tweet:"https://x.com/MeteoraEco/status/2054728103507919337"},
-    {key:"solanarwa",    title:"Real World Assets",cat:"Data Narrative",  desc:"RWAs soaring on Solana. Sponsored by Meteora.", tweet:"https://x.com/MeteoraEco/status/2070179665009127807"},
-    {key:"prestock",     title:"Prestock",         cat:"Product Story",   desc:"Pre-IPO investing, made cinematic.", tweet:"https://x.com/MeteoraEco/status/2057233167027978738"},
-    {key:"digitalasset", title:"Digital Gold",     cat:"Product Film",    desc:"Onchain gold via ORO — reserves, transparency, trust.", tweet:"https://x.com/MeteoraEco/status/2040444579984375899"},
-    {key:"altitude",     title:"Altitude",         cat:"Brand Film",      desc:"A premium brand film.", tweet:"https://x.com/MeteoraEco/status/2057904490867757187"},
   ];
   const XICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>';
   const wc = document.getElementById('works');
